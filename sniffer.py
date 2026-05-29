@@ -1,14 +1,20 @@
-from scapy.all import *
+from scapy.all import sniff,ARP
 from scapy.layers.inet import IP,TCP,UDP,ICMP
 import time
-syn_timestamps={}
+from datetime import datetime
+from logger import log_alert
+from detectors.syn_detector import detect_syn_flood
+from detectors.arp_detector import detect_arp_spoof
+from detectors.udp_detector import detect_udp_flood
+from detectors.dns_detector import detect_dns_tunneling
+from detectors.http_detector import detect_http_attacks
 syn_count={}
 port_scan_tracker={}
-log_file="alerts.log"
-def log_alert(message):
-    with open(log_file,"a")as file:
-        file.write(message + "\n")
+
 def packet_callback(packet):
+    detect_http_attacks(packet)
+    detect_dns_tunneling(packet)
+    detect_arp_spoof(packet)
     if IP in packet:
         src_ip=packet[IP].src
         dest_ip=packet[IP].dst
@@ -21,6 +27,7 @@ def packet_callback(packet):
             print(f"source port:{src_port}")
             print(f"destination port:{dest_port}")
             print(f"tcp flags:{flags}")
+            detect_syn_flood(src_ip,flags)
             if src_ip not in port_scan_tracker:
                 port_scan_tracker[src_ip]=set()
             port_scan_tracker[src_ip].add(dest_port)
@@ -29,24 +36,14 @@ def packet_callback(packet):
                 print(f"ALERT!!!!possible port scan from {src_ip}")
                 
                 log_alert(f"ALERT!!!!possible port scan from {src_ip}")
-            if flags=="S":
-                if src_ip not in syn_count:
-                    syn_count[src_ip]=0
-                ct=time.time()
-                if src_ip not in syn_timestamps:
-                    syn_timestamps[src_ip]=[]
-                syn_timestamps[src_ip].append(ct)
-                syn_timestamps[src_ip]=[t for t in syn_timestamps[src_ip]if ct-t<10]
-                print(f"SYN count from {src_ip} : {syn_count[src_ip]}")
-                if len(syn_timestamps[src_ip])>20:
-                    print(f"ALERT!!! possible syn flood from {src_ip}")
-                    log_alert(f"ALERT!!! possible syn flood from {src_ip}")
+            
             print("===================")
         elif UDP in packet:
             src_port=packet[UDP].sport
             dest_port=packet[UDP].dport
             print(f"UDP source port:{src_port}")
             print(f"UDP destination port:{dest_port}")
+            detect_udp_flood(src_ip)
         elif ICMP in packet:
             icmp_type=packet[ICMP].type
             print(f"ICMP TYPE:{icmp_type}")
