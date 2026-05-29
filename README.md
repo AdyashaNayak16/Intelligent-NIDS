@@ -1,126 +1,99 @@
-Intelligent Network Intrusion Detection System (NIDS)
+# Intelligent Network Intrusion Detection System (NIDS)
 
-Overview
+## Overview
 
-This project is a real-time Intelligent Network Intrusion Detection System (NIDS) built using Python and Scapy.
+An intelligent real-time Network Intrusion Detection System built using Python and Scapy.
 
-The system captures live network packets, analyzes protocol behavior across multiple OSI layers, and detects suspicious or malicious activities using rule-based behavioral analysis.
+The system captures and analyzes live network traffic across multiple OSI layers to detect suspicious activity such as flooding attacks, ARP spoofing, DNS tunneling patterns, malicious HTTP payloads, and beaconing behavior.
 
-The project follows a modular cybersecurity architecture and is designed to be extended toward machine learning-based anomaly detection.
+The project follows a modular architecture to support future integration of machine learning-based anomaly detection.
 
+---
 
+## Implemented Features
 
-Features
+### Network Monitoring
+- Live packet sniffing
+- TCP, UDP, ICMP, and ARP analysis
+- Stateful traffic tracking
+- Real-time packet inspection
 
-Layer 2 Detection
+### Detection Modules
+- SYN Flood Detection
+- UDP Flood Detection
+- Port Scan Detection
+- ARP Spoof Detection
+- DNS Tunneling Heuristics
+- HTTP Payload Inspection
+- Beaconing Detection
 
- ARP Spoofing Detection
+### Logging
+- Structured alert logging
+- Timestamped security events
+- Persistent alert storage
 
-Layer 3 Detection
+---
 
- IP Traffic Monitoring
- ICMP Activity Monitoring
+## Technologies Used
 
-Layer 4 Detection
+- Python
+- Scapy
+- Wireshark / Tshark
+- Packet Sniffing
+- Behavioral Traffic Analysis
 
- SYN Flood Detection
- UDP Flood Detection
- Port Scan Detection
- Time-window Behavioral Analysis
+---
 
-Layer 7 Detection
-
- DNS Tunneling Heuristics
- HTTP Payload Inspection
- Suspicious Payload Detection
-
-Behavioral Analysis
-
- Beaconing Traffic Detection
- Stateful Packet Tracking
- Rate-based Detection
-
-
-
-Technologies Used
-
- Python
- Scapy
- Wireshark / Tshark
- Packet Sniffing
- Behavioral Analysis
- Modular IDS Architecture
+## Project Structure
 
 
-
-Project Structure
-
-nids-project/
+INTELLIGENT-NIDS/
 │
 ├── detectors/
-│     ├── arp_detector.py
-│     ├── beacon_detector.py
-│     ├── dns_detector.py
-│     ├── http_detector.py
-│     ├── syn_detector.py
-│     └── udp_detector.py
+│   ├── arp_detector.py
+│   ├── beacon_detector.py
+│   ├── dns_detector.py
+│   ├── http_detector.py
+│   ├── syn_detector.py
+│   └── udp_detector.py
 │
 ├── sniffer.py
 ├── logger.py
 ├── alerts.log
 └── README.md
+```
 
+---
 
+## Current Status
 
-Current Detection Capabilities
+The current implementation includes:
+- modular detector architecture
+- real-time traffic inspection
+- behavioral analysis modules
+- application-layer payload inspection
 
-Detection Type| Status
-SYN Flood Detection| Implemented
-UDP Flood Detection| Implemented
-Port Scan Detection| Implemented
-ARP Spoof Detection| Implemented
-DNS Tunneling Detection| Implemented
-HTTP Payload Analysis| Implemented
-Beaconing Detection| Implemented
+Future development will focus on:
+- machine learning integration
+- anomaly detection models
+- PCAP replay support
+- dashboard visualization
+- threat intelligence integration
 
+---
 
+## Learning Outcomes
 
-Logging System
+This project explores:
+- TCP/IP and OSI networking
+- packet-level traffic analysis
+- intrusion detection concepts
+- deep packet inspection
+- behavioral threat detection
+- modular cybersecurity engineering
 
-The IDS generates structured security logs in:
+---
 
-alerts.log
+## Disclaimer
 
-Each log entry contains:
-
- Timestamp
- Alert Type
- Source Information
-
-
-
-Future Improvements
-
- Machine Learning-based anomaly detection
- Isolation Forest integration
- Autoencoder-based traffic analysis
- LSTM packet sequence analysis
- Threat intelligence integration
- GeoIP enrichment
- Dashboard visualization
- PCAP replay support
- Suricata / Zeek integration
-
-
-
-Learning Outcomes
-
-This project helped in understanding:
-
- TCP/IP and OSI model
- Packet analysis
- Real-time intrusion detection
- Behavioral traffic analysis
- Deep Packet Inspection (DPI)
- Stateful detection systems
- Modular cybersecurity engineering
+This project is intended for educational and defensive cybersecurity purposes only.
