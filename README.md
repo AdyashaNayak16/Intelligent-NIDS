@@ -2,51 +2,36 @@
 
 ## Overview
 
-An intelligent real-time Network Intrusion Detection System built using Python and Scapy.
+This project is a real-time Network Intrusion Detection System built using Python and Scapy. The system captures live network traffic, analyzes packets across multiple OSI layers, and detects suspicious or malicious behavior using rule-based detection techniques.
 
-The system captures and analyzes live network traffic across multiple OSI layers to detect suspicious activity such as flooding attacks, ARP spoofing, DNS tunneling patterns, malicious HTTP payloads, and beaconing behavior.
-
-The project follows a modular architecture to support future integration of machine learning-based anomaly detection.
-
----
+The project currently supports detection of flooding attacks, ARP spoofing, DNS tunneling patterns, suspicious HTTP payloads, and beaconing activity. The architecture is modular so that new detectors and machine learning models can be integrated easily in future versions.
 
 ## Implemented Features
 
-### Network Monitoring
-- Live packet sniffing
-- TCP, UDP, ICMP, and ARP analysis
-- Stateful traffic tracking
-- Real-time packet inspection
+The IDS currently includes:
 
-### Detection Modules
-- SYN Flood Detection
-- UDP Flood Detection
-- Port Scan Detection
-- ARP Spoof Detection
-- DNS Tunneling Heuristics
-- HTTP Payload Inspection
-- Beaconing Detection
-
-### Logging
+- Live packet sniffing and traffic analysis
+- TCP, UDP, ICMP, and ARP packet inspection
+- SYN flood detection
+- UDP flood detection
+- Port scan detection
+- ARP spoof detection
+- DNS tunneling heuristics
+- HTTP payload inspection
+- Beaconing traffic detection
 - Structured alert logging
-- Timestamped security events
-- Persistent alert storage
-
----
 
 ## Technologies Used
 
 - Python
 - Scapy
 - Wireshark / Tshark
-- Packet Sniffing
-- Behavioral Traffic Analysis
-
----
+- Packet sniffing
+- Behavioral traffic analysis
 
 ## Project Structure
 
-
+```bash
 INTELLIGENT-NIDS/
 │
 ├── detectors/
@@ -63,37 +48,18 @@ INTELLIGENT-NIDS/
 └── README.md
 ```
 
----
+## Current Development
 
-## Current Status
-
-The current implementation includes:
-- modular detector architecture
-- real-time traffic inspection
-- behavioral analysis modules
-- application-layer payload inspection
-
-Future development will focus on:
-- machine learning integration
-- anomaly detection models
-- PCAP replay support
-- dashboard visualization
-- threat intelligence integration
-
----
+The current version focuses on building the core IDS engine and behavioral detection framework. Future improvements will include machine learning-based anomaly detection, PCAP replay support, dashboard visualization, and threat intelligence integration.
 
 ## Learning Outcomes
 
-This project explores:
+This project explores concepts related to:
+
 - TCP/IP and OSI networking
-- packet-level traffic analysis
-- intrusion detection concepts
-- deep packet inspection
-- behavioral threat detection
-- modular cybersecurity engineering
+- Packet-level traffic analysis
+- Intrusion detection systems
+- Deep packet inspection
+- Behavioral threat detection
+- Modular cybersecurity engineering
 
----
-
-## Disclaimer
-
-This project is intended for educational and defensive cybersecurity purposes only.
