@@ -8,8 +8,12 @@ from detectors.arp_detector import detect_arp_spoof
 from detectors.udp_detector import detect_udp_flood
 from detectors.dns_detector import detect_dns_tunneling
 from detectors.http_detector import detect_http_attacks
+from detectors.beacon_detector import detect_beaconing
+from detectors.port_scan import detect_port_scan
+from detectors.ip_spoof_detector import detect_ip_spoof
+from detectors.botnet_detector import detect_botnet_traffic
 syn_count={}
-port_scan_tracker={}
+
 
 def packet_callback(packet):
     detect_http_attacks(packet)
@@ -18,8 +22,13 @@ def packet_callback(packet):
     if IP in packet:
         src_ip=packet[IP].src
         dest_ip=packet[IP].dst
+        detect_ip_spoof(src_ip)
+        detect_botnet_traffic(src_ip,dest_ip)
+        detect_beaconing(src_ip,dest_ip)
+        
         print(f"source ip:{src_ip}")
         print(f"destination ip:{dest_ip}")
+        
         if TCP in packet:
             src_port=packet[TCP].sport
             dest_port=packet[TCP].dport
@@ -28,14 +37,8 @@ def packet_callback(packet):
             print(f"destination port:{dest_port}")
             print(f"tcp flags:{flags}")
             detect_syn_flood(src_ip,flags)
-            if src_ip not in port_scan_tracker:
-                port_scan_tracker[src_ip]=set()
-            port_scan_tracker[src_ip].add(dest_port)
-            print(f"ports contacted by {src_ip}:{port_scan_tracker[src_ip]}")
-            if len(port_scan_tracker[src_ip])>10:
-                print(f"ALERT!!!!possible port scan from {src_ip}")
-                
-                log_alert(f"ALERT!!!!possible port scan from {src_ip}")
+            detect_port_scan(src_ip,dest_port)
+            
             
             print("===================")
         elif UDP in packet:
@@ -49,4 +52,4 @@ def packet_callback(packet):
             print(f"ICMP TYPE:{icmp_type}")
             if icmp_type==8:
                 print("ICMP echo request detected ")
-sniff(prn=packet_callback,store=False,count=2)
+sniff(prn=packet_callback,store=False,count=50)
