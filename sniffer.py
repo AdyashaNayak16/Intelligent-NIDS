@@ -12,6 +12,8 @@ from detectors.beacon_detector import detect_beaconing
 from detectors.port_scan import detect_port_scan
 from detectors.ip_spoof_detector import detect_ip_spoof
 from detectors.botnet_detector import detect_botnet_traffic
+from flow_tracker import update_flow
+from detectors.ml_detectors import detect_ml_attack
 syn_count={}
 
 
@@ -22,6 +24,11 @@ def packet_callback(packet):
     if IP in packet:
         src_ip=packet[IP].src
         dest_ip=packet[IP].dst
+        protocol=packet[IP].proto
+        flow=update_flow(
+            src_ip,dest_ip,protocol,len(packet)
+        )
+    
         detect_ip_spoof(src_ip)
         detect_botnet_traffic(src_ip,dest_ip)
         detect_beaconing(src_ip,dest_ip)
@@ -33,6 +40,19 @@ def packet_callback(packet):
             src_port=packet[TCP].sport
             dest_port=packet[TCP].dport
             flags=packet[TCP].flags
+            flow_features=update_flow(
+                src_ip=src_ip,
+                dst_ip=dest_ip,
+                protocol="TCP",
+                packet_len=len(packet),
+                dst_port=dest_port,
+                tcp_flags=int(flags)
+            )
+            prediction=detect_ml_attack(flow_features)
+            print(f"ML PREDICTION:{prediction}")
+            if prediction=="BOT":
+                print(f"[ML Alert] suspicious bot traffic detected from {src_ip}")
+                log_alert("ML BOT DETECTION",src_ip)
             print(f"source port:{src_port}")
             print(f"destination port:{dest_port}")
             print(f"tcp flags:{flags}")
