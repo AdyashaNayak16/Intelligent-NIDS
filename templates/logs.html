@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="page-title">Logs</h1><div class="alerts-table"><div class="table-header">
+    <div>Time</div>
+    <div>Alert Type</div>
+    <div>Source</div>
+</div>
+
+{% for alert in alerts %}
+
+<div class="table-row">
+    <div>{{ alert.time }}</div>
+    <div>{{ alert.type }}</div>
+    <div>{{ alert.source }}</div>
+</div>
+
+{% endfor %}
+
+</div>{% endblock %}

@@ -14,6 +14,7 @@ from detectors.ip_spoof_detector import detect_ip_spoof
 from detectors.botnet_detector import detect_botnet_traffic
 from flow_tracker import update_flow
 from detectors.ml_detectors import detect_ml_attack
+
 syn_count={}
 
 
@@ -49,6 +50,7 @@ def packet_callback(packet):
                 tcp_flags=int(flags)
             )
             prediction=detect_ml_attack(flow_features)
+            
             print(f"ML PREDICTION:{prediction}")
             if prediction=="BOT":
                 print(f"[ML Alert] suspicious bot traffic detected from {src_ip}")

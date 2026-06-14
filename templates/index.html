@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="page-title">Dashboard</h1><div class="status-banner">
+    <span class="status-dot"></span>
+    System Status: Running
+</div><div class="cards"><div class="card">
+    <div class="card-label">Alerts Today</div>
+    <div class="card-value">{{total_alerts}}</div>
+</div>
+
+<div class="card">
+    <div class="card-label">Packets Seen</div>
+    <div class="card-value">1542</div>
+</div>
+
+<div class="card">
+    <div class="card-label">ML Detections</div>
+    <div class="card-value">3</div>
+</div>
+<div class="card">
+    <div class="card-label">
+        Latest ML Prediction
+    </div>
+
+    <div class="card-value">
+        {{ latest_prediction }}
+    </div>
+</div>
+
+</div><h2 class="section-title">
+    Recent Alerts
+</h2><div class="alerts-table"><div class="table-header">
+    <div>Time</div>
+    <div>Alert Type</div>
+    <div>Source</div>
+</div>
+
+{% for alert in alerts %}
+
+<div class="table-row">
+    <div>{{ alert.time }}</div>
+    <div>{{ alert.type }}</div>
+    <div>{{ alert.source }}</div>
+</div>
+
+{% endfor %}
+
+</div>{% endblock %}

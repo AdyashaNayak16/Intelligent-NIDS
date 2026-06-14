@@ -1,0 +1,207 @@
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:#111827;
+    color:#F3F4F6;
+
+    display:flex;
+}
+
+.sidebar{
+
+    width:240px;
+    height:100vh;
+
+    background:#0f172a;
+
+    border-right:1px solid #374151;
+
+    padding-top:40px;
+}
+
+.brand{
+
+    text-align:center;
+
+    font-size:1.8rem;
+    font-weight:700;
+
+    color:#EC4899;
+
+    margin-bottom:50px;
+
+    letter-spacing:3px;
+}
+
+.sidebar a{
+
+    display:block;
+
+    color:#D1D5DB;
+
+    text-decoration:none;
+
+    padding:18px 30px;
+
+    transition:0.3s;
+}
+
+.sidebar a:hover{
+
+    background:#1F2937;
+
+    color:white;
+}
+
+.main-content{
+
+    flex:1;
+
+    padding:40px;
+}
+.page-title{
+
+    font-size:2.5rem;
+    margin-bottom:30px;
+
+    font-weight:600;
+}
+
+.cards{
+
+    display:flex;
+    gap:25px;
+
+    margin-top:20px;
+}
+
+.card{
+
+    background:#1F2937;
+
+    border:1px solid #374151;
+
+    border-radius:12px;
+
+    padding:25px;
+
+    width:220px;
+}
+
+.card-label{
+
+    color:#9CA3AF;
+
+    font-size:0.95rem;
+
+    margin-bottom:15px;
+}
+
+.card-value{
+
+    font-size:2.4rem;
+
+    font-weight:700;
+}
+.section-title{
+
+    margin-top:50px;
+    margin-bottom:20px;
+
+    font-size:1.5rem;
+    font-weight:600;
+}
+
+.alerts-table{
+
+    background:#1F2937;
+
+    border:1px solid #374151;
+
+    border-radius:12px;
+
+    overflow:hidden;
+}
+
+.table-header,
+.table-row{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        2fr
+        2fr;
+
+    padding:18px 25px;
+}
+
+.table-header{
+
+    background:#111827;
+
+    font-weight:600;
+
+    color:#D1D5DB;
+}
+
+.table-row{
+
+    border-top:1px solid #374151;
+
+    color:#E5E7EB;
+}
+.sidebar{
+    width:260px;
+    height:100vh;
+    background:#0f172a;
+    border-right:1px solid #374151;
+    padding-top:40px;
+}
+
+.brand{
+    text-align:center;
+    font-size:1.8rem;
+    font-weight:700;
+    color:#EC4899;
+    margin-bottom:50px;
+    letter-spacing:3px;
+}
+
+.cards{
+    display:flex;
+    gap:25px;
+    margin-top:20px;
+    margin-bottom:50px;
+}
+.status-banner{
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    width:fit-content;
+
+    padding:12px 18px;
+
+    background:#1F2937;
+
+    border:1px solid #374151;
+
+    border-radius:10px;
+
+    margin-bottom:30px;
+
+    color:#D1D5DB;
+}
+
+.status-dot{
+
+    width:10px;
+    height:10px;
+
+    background:#22C55E;
+
+    border-radius:50%;
+}
