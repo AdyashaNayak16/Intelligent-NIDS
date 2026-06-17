@@ -2,49 +2,59 @@
 
 {% block content %}
 
-<h1 class="page-title">Dashboard</h1><div class="status-banner">
-    <span class="status-dot"></span>
-    System Status: Running
-</div><div class="cards"><div class="card">
-    <div class="card-label">Alerts Today</div>
-    <div class="card-value">{{total_alerts}}</div>
+<h1>Dashboard</h1>
+
+<div class="status-box">
+    🟢 System Status: Running
 </div>
 
-<div class="card">
-    <div class="card-label">Packets Seen</div>
-    <div class="card-value">1542</div>
-</div>
+<div class="stats-container">
 
-<div class="card">
-    <div class="card-label">ML Detections</div>
-    <div class="card-value">3</div>
-</div>
-<div class="card">
-    <div class="card-label">
-        Latest ML Prediction
+    <div class="stat-card">
+        <h3>Alerts Today</h3>
+        <h1>{{ total_alerts }}</h1>
     </div>
 
-    <div class="card-value">
-        {{ latest_prediction }}
+    <div class="stat-card">
+        <h3>Packets Seen</h3>
+        <h1>{{ packets_seen }}</h1>
     </div>
+
+    <div class="stat-card">
+        <h3>ML Detections</h3>
+        <h1>{{ ml_detections }}</h1>
+    </div>
+
 </div>
 
-</div><h2 class="section-title">
-    Recent Alerts
-</h2><div class="alerts-table"><div class="table-header">
-    <div>Time</div>
-    <div>Alert Type</div>
-    <div>Source</div>
+<div class="alerts-section">
+
+    <h2>Recent Alerts</h2>
+
+    <table class="alerts-table">
+
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Alert Type</th>
+                <th>Source</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for alert in alerts %}
+            <tr>
+                <td>{{ alert.time }}</td>
+                <td>{{ alert.type }}</td>
+                <td>{{ alert.source }}</td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
 </div>
 
-{% for alert in alerts %}
-
-<div class="table-row">
-    <div>{{ alert.time }}</div>
-    <div>{{ alert.type }}</div>
-    <div>{{ alert.source }}</div>
-</div>
-
-{% endfor %}
-
-</div>{% endblock %}
+{% endblock %}

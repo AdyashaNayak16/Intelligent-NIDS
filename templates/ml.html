@@ -2,50 +2,45 @@
 
 {% block content %}
 
-<h1 class="page-title">ML Analytics</h1><div class="cards"><div class="card">
-    <div class="card-label">Model</div>
-    <div class="card-value">
-        XGBoost
+<h1>ML Analytics</h1>
+
+<div class="stats-container">
+
+    <div class="stat-card">
+        <h3>Model</h3>
+        <h1>XGBoost</h1>
     </div>
-</div>
 
-<div class="card">
-    <div class="card-label">Accuracy</div>
-    <div class="card-value">
-        99%
+    <div class="stat-card">
+        <h3>Accuracy</h3>
+        <h1>99.69%</h1>
     </div>
-</div>
 
-<div class="card">
-    <div class="card-label">F1 Score</div>
-    <div class="card-value">
-        83%
+    <div class="stat-card">
+        <h3>F1 Score</h3>
+        <h1>83%</h1>
     </div>
+
 </div>
 
-</div><div class="alerts-table"><div class="table-header">
-    <div>Metric</div>
-    <div>Value</div>
+<div class="stats-container">
+
+    <div class="stat-card">
+        <h3>Precision</h3>
+        <h1>97%</h1>
+    </div>
+
+    <div class="stat-card">
+        <h3>Recall</h3>
+        <h1>72%</h1>
+    </div>
+
+    <div class="stat-card">
+        <h3>Classes</h3>
+        <h1>2</h1>
+        <p>BENIGN, BOT</p>
+    </div>
+
 </div>
 
-<div class="table-row">
-    <div>Precision</div>
-    <div>97%</div>
-</div>
-
-<div class="table-row">
-    <div>Recall</div>
-    <div>72%</div>
-</div>
-
-<div class="table-row">
-    <div>Algorithm</div>
-    <div>XGBoost Classifier</div>
-</div>
-
-<div class="table-row">
-    <div>Classes</div>
-    <div>BENIGN, BOT</div>
-</div>
-
-</div>{% endblock %}
+{% endblock %}
